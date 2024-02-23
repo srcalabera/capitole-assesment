@@ -1,7 +1,6 @@
 # Desafio Capitole - Zara
 
 **Getting Started**
-
 * Java 17
 * Spring Boot
 * Junit 5
@@ -17,3 +16,10 @@
 
 ### For swagger document
 http://localhost:8080/swagger-ui/index.html
+
+### Prepare project 
+mvn clean install
+
+### run project 
+cd infrastructure
+mvn spring-boot:infrastructure:run
