@@ -14,3 +14,6 @@
 | Path | Operation | Summary               |
 | ------ | ------ |-----------------------|
 |/product/35455?brandId=1&date=2020-06-16 21:00:00|GET| Get Product Detail |
+
+### For swagger document
+http://localhost:8080/swagger-ui/index.html

@@ -1,6 +1,6 @@
 
 
-create table  prices (
+create table  products (
     id bigint AUTO_INCREMENT primary key ,
     brand_id bigint not null,
     start_date timestamp not null,

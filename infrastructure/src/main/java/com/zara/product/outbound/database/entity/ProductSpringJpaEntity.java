@@ -1,14 +1,14 @@
 package com.zara.product.outbound.database.entity;
 
-import com.zara.product.model.Price;
+import com.zara.product.model.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-@Entity(name = "prices")
-public class PriceSpringJpaEntity {
+@Entity(name = "products")
+public class ProductSpringJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -38,10 +38,10 @@ public class PriceSpringJpaEntity {
     @NotEmpty
     String curr;
 
-    public PriceSpringJpaEntity() {
+    public ProductSpringJpaEntity() {
     }
 
-    public PriceSpringJpaEntity(Long id, BigInteger brandId, LocalDateTime startDate, LocalDateTime endDate, BigInteger priceList, BigInteger productId, int priority, Double price, String curr) {
+    public ProductSpringJpaEntity(Long id, BigInteger brandId, LocalDateTime startDate, LocalDateTime endDate, BigInteger priceList, BigInteger productId, int priority, Double price, String curr) {
         this.id = id;
         this.brandId = brandId;
         this.startDate = startDate;
@@ -53,7 +53,7 @@ public class PriceSpringJpaEntity {
         this.curr = curr;
     }
 
-    public Price toDomainModel() {
-        return new Price(id, brandId, startDate, endDate, priceList, productId, priority, price, curr);
+    public Product toDomainModel() {
+        return new Product( brandId, startDate, endDate, priceList, productId, price);
     }
 }

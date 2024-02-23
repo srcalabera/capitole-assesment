@@ -1,8 +1,8 @@
 package com.zara.product.find;
 
-import com.zara.product.exception.NotFoundException;
-import com.zara.product.model.Price;
-import com.zara.product.port.PricePersistencePort;
+import com.zara.product.exception.ProductNotFoundException;
+import com.zara.product.model.Product;
+import com.zara.product.port.ProductPersistencePort;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +18,13 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-class PriceFindUseCaseTest {
+class ProductFindUseCaseTest {
 
     @InjectMocks
-    public PriceFindUseCase priceFindUseCase;
+    public ProductFindUseCase productFindUseCase;
 
     @Mock
-    public PricePersistencePort pricePersistencePort;
+    public ProductPersistencePort productPersistencePort;
 
     @Test
     public void testFindProductDetail() {
@@ -33,20 +33,17 @@ class PriceFindUseCaseTest {
         var brandId = java.math.BigInteger.valueOf(1);
         var date = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
 
-        Mockito.when(pricePersistencePort.findByProductAndBrandAndDate(productId,brandId,date))
-                .thenReturn(Optional.of(new Price(
-                        0L,
+        Mockito.when(productPersistencePort.findByProductAndBrandAndDate(productId,brandId,date))
+                .thenReturn(Optional.of(new Product(
                         brandId,
                         LocalDateTime.now(),
                         LocalDateTime.now(),
                         java.math.BigInteger.valueOf(1),
                         productId,
-                        1,
-                        20.30,
-                        "EUR"
+                        20.30
                 )));
 
-        var result = priceFindUseCase.findProductDetail(productId,brandId,date);
+        var result = productFindUseCase.findProductDetail(productId,brandId,date);
 
 
         assertEquals(BigInteger.valueOf(1), result.priceList());
@@ -54,7 +51,7 @@ class PriceFindUseCaseTest {
         assertEquals(brandId, result.brandId());
         assertEquals(20.30, result.price());
 
-        Mockito.verify(pricePersistencePort).findByProductAndBrandAndDate(productId,brandId,date);
+        Mockito.verify(productPersistencePort).findByProductAndBrandAndDate(productId,brandId,date);
     }
 
     @Test
@@ -64,11 +61,11 @@ class PriceFindUseCaseTest {
         var brandId = java.math.BigInteger.valueOf(1);
         var date = LocalDateTime.of(2020, 6, 14, 10, 0, 0);
 
-        Mockito.when(pricePersistencePort.findByProductAndBrandAndDate(productId,brandId,date))
+        Mockito.when(productPersistencePort.findByProductAndBrandAndDate(productId,brandId,date))
                 .thenReturn(Optional.empty());
 
-        NotFoundException thrown = Assertions.assertThrows(NotFoundException.class, () -> {
-            priceFindUseCase.findProductDetail(productId,brandId,date);
+        ProductNotFoundException thrown = Assertions.assertThrows(ProductNotFoundException.class, () -> {
+            productFindUseCase.findProductDetail(productId,brandId,date);
         }, "");
 
         Assertions.assertEquals("Product Not Found please provide other information", thrown.getErrorMessage());

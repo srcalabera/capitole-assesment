@@ -1,7 +1,7 @@
 package com.zara.product.inbound.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zara.product.model.Price;
+import com.zara.product.model.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class PriceFindControllerTest {
+class ProductFindControllerTest {
 
     private static final String PRODUCT_PATH = "/product";
 
@@ -42,7 +42,7 @@ class PriceFindControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        var price = objectMapper.readValue(responseContent, Price.class);
+        var price = objectMapper.readValue(responseContent, Product.class);
 
         assertEquals(BigInteger.valueOf(1), price.priceList());
         assertEquals(productId, price.productId());
@@ -65,7 +65,7 @@ class PriceFindControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        var price = objectMapper.readValue(responseContent, Price.class);
+        var price = objectMapper.readValue(responseContent, Product.class);
 
         assertEquals(BigInteger.valueOf(2), price.priceList());
         assertEquals(productId, price.productId());
@@ -88,7 +88,7 @@ class PriceFindControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        var price = objectMapper.readValue(responseContent, Price.class);
+        var price = objectMapper.readValue(responseContent, Product.class);
 
         assertEquals(BigInteger.valueOf(1), price.priceList());
         assertEquals(productId, price.productId());
@@ -111,7 +111,7 @@ class PriceFindControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        var price = objectMapper.readValue(responseContent, Price.class);
+        var price = objectMapper.readValue(responseContent, Product.class);
 
         assertEquals(BigInteger.valueOf(3), price.priceList());
         assertEquals(productId, price.productId());
@@ -134,7 +134,7 @@ class PriceFindControllerTest {
                 .andReturn();
 
         String responseContent = result.getResponse().getContentAsString();
-        var price = objectMapper.readValue(responseContent, Price.class);
+        var price = objectMapper.readValue(responseContent, Product.class);
 
         assertEquals(BigInteger.valueOf(4), price.priceList());
         assertEquals(productId, price.productId());

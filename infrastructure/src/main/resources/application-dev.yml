@@ -4,7 +4,7 @@ spring:
   main:
     lazy-initialization: true
   datasource:
-    url: jdbc:h2:file:~/testdb;NON_KEYWORDS=USER
+    url: jdbc:h2:file:~/productdb;NON_KEYWORDS=USER
     username: sa
     password: password
     driverClassName: org.h2.Driver
