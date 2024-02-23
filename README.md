@@ -17,9 +17,9 @@
 ### For swagger document
 http://localhost:8080/swagger-ui/index.html
 
-### Prepare project 
-mvn clean install
+### Prepare Project 
+* mvn clean install
 
-### run project 
-cd infrastructure
-mvn spring-boot:infrastructure:run
+### Run Project 
+* cd infrastructure
+* mvn spring-boot:infrastructure:run
