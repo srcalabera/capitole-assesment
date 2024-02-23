@@ -1,6 +1,6 @@
-drop table if exists "brand";
 
-CREATE TABLE "brand" (
-    "id" bigint primary key,
-    "name" varchar(50) not null
+
+CREATE TABLE brand (
+    id bigint AUTO_INCREMENT primary key,
+    name varchar(50) not null
 );
