@@ -1,5 +1,6 @@
 package com.zara.product.find;
 
+import com.zara.product.exception.NotFoundException;
 import com.zara.product.model.Price;
 import com.zara.product.port.PricePersistencePort;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,9 @@ import java.time.LocalDateTime;
 public class PriceFindUseCase {
     private final PricePersistencePort pricePersistencePort;
     public Price findProductDetail(BigInteger productId, BigInteger brandId, LocalDateTime date){
-        return this.pricePersistencePort.findByProductAndBrandAndDate(productId,brandId,date).orElseThrow();
+        return this.pricePersistencePort.findByProductAndBrandAndDate(productId,brandId,date)
+                .orElseThrow(() ->
+                        new NotFoundException("Product Not Found please provide other information")
+                );
     }
 }

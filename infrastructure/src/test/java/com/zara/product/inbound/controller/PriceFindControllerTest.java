@@ -97,7 +97,6 @@ class PriceFindControllerTest {
 
     }
 
-
     @Test
     @DisplayName("petición a las 10:00 del día 15 del producto 35455 para la brand 1 (ZARA)")
     public void getProductInformation4() throws Exception {
@@ -121,8 +120,6 @@ class PriceFindControllerTest {
 
     }
 
-
-
     @Test
     @DisplayName("petición a las 21:00 del día 16 del producto 35455 para la brand 1 (ZARA)")
     public void getProductInformation5() throws Exception {
@@ -143,6 +140,21 @@ class PriceFindControllerTest {
         assertEquals(productId, price.productId());
         assertEquals(brandId, price.brandId());
         assertEquals(38.95, price.price());
+
+    }
+
+    @Test
+    @DisplayName("cuando el producto no existe para la brand 1 (ZARA)")
+    public void getProductInformation6() throws Exception {
+        var productId = java.math.BigInteger.valueOf(35456);
+        var brandId = java.math.BigInteger.valueOf(1);
+        var date = LocalDateTime.of(2020, 6, 16, 21, 0, 0);
+
+        this.mockMvc.perform(get(PRODUCT_PATH + "/" + productId)
+                        .param("brandId", String.valueOf(brandId))
+                        .param("date", String.valueOf(date)))
+                .andExpect(status().isNotFound())
+                .andReturn();
 
     }
 }
