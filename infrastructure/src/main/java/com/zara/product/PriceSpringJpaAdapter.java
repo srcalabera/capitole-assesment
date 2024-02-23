@@ -18,7 +18,7 @@ public class PriceSpringJpaAdapter implements PricePersistencePort {
 
     @Override
     public Optional<Price> findByProductAndBrandAndDate(BigInteger productId, BigInteger brandId, LocalDateTime date) {
-        return priceSpringJpaRepository.findByProductIdAndBrandIdAndStartDateIsGreaterThanEqualAndEndDateIsLessThanEqualOrderByPriorityDesc(
+        return priceSpringJpaRepository.findFirstByProductIdAndBrandIdAndStartDateIsLessThanEqualAndEndDateIsGreaterThanEqualOrderByPriorityDesc(
                 productId,
                 brandId,
                 date,

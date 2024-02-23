@@ -6,42 +6,54 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+
 @Entity(name = "prices")
-public record PriceSpringJpaEntity(
+public class PriceSpringJpaEntity {
     @Id
-    @GeneratedValue
-    Long id,
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    Long id;
     @Column(name = "brand_id")
     @NotEmpty
-    BigInteger brandId,
+    BigInteger brandId;
     @Column(name = "start_date")
     @NotEmpty
-    LocalDateTime startDate,
+    LocalDateTime startDate;
     @Column(name = "end_date")
     @NotEmpty
-    LocalDateTime endDate,
+    LocalDateTime endDate;
     @Column(name = "price_list")
     @NotEmpty
-    BigInteger priceList,
+    BigInteger priceList;
     @Column(name = "product_id")
     @NotEmpty
-    BigInteger productId,
+    BigInteger productId;
     @Column(name = "priority")
     @NotEmpty
-    int priority,
+    int priority;
     @Column(name = "price")
     @NotEmpty
-    Double price,
+    Double price;
     @Column(name = "curr")
     @NotEmpty
-    String curr)
-{
+    String curr;
 
     public PriceSpringJpaEntity() {
-        this(0L,BigInteger.ZERO,LocalDateTime.now(),LocalDateTime.now(),BigInteger.ZERO,BigInteger.ZERO,0,0.0,"");
     }
 
-    public Price toDomainModel(){
-        return new Price(id,brandId,startDate,endDate,priceList,productId,priority,price,curr);
+    public PriceSpringJpaEntity(Long id, BigInteger brandId, LocalDateTime startDate, LocalDateTime endDate, BigInteger priceList, BigInteger productId, int priority, Double price, String curr) {
+        this.id = id;
+        this.brandId = brandId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priceList = priceList;
+        this.productId = productId;
+        this.priority = priority;
+        this.price = price;
+        this.curr = curr;
+    }
+
+    public Price toDomainModel() {
+        return new Price(id, brandId, startDate, endDate, priceList, productId, priority, price, curr);
     }
 }

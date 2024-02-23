@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PriceSpringJpaRepository extends JpaRepository<PriceSpringJpaEntity, Long> {
 
-    Optional<PriceSpringJpaEntity> findByProductIdAndBrandIdAndStartDateIsGreaterThanEqualAndEndDateIsLessThanEqualOrderByPriorityDesc(
+    Optional<PriceSpringJpaEntity> findFirstByProductIdAndBrandIdAndStartDateIsLessThanEqualAndEndDateIsGreaterThanEqualOrderByPriorityDesc(
             BigInteger productId,
             BigInteger brandId,
             LocalDateTime dateForStart,
